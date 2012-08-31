@@ -1,0 +1,63 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>我的购物车</title>
+    <script type="text/javascript">
+        function del_confirm(bookid)
+        {
+            var res = window.confirm("确定删除此商品吗？");
+            if (res)
+            {
+                window.location.href = "/shopping/delproduct?id=" + bookid;
+            }
+        }
+    </script>
+</head>
+
+<center>
+<body>
+<h1><font color="blue">我的购物车</font></h1>
+
+<form action="/shopping/updatecart" method="post">
+<table width="700px">
+    <tr>
+        <td>id</td>
+        <td>书名</td>
+        <td>作者</td>
+        <td>价格</td>
+        <td>出版社</td>
+        <td>数量</td>
+        <td>删除</td>
+    </tr>
+    <?php foreach ($this->books as $book){?>
+        <tr>
+            <td><?=$book['id']?></td>
+            <td><?=$book['name']?></td>
+            <td><?=$book['author']?></td>
+            <td><?=$book['price']?></td>
+            <td><?=$book['publishHouse']?></td>
+            <input type="hidden" name="id[]" value='<?=$book['id']?>' />
+            <td><input type="text" name="nums[]" value='<?=$book['nums']?>' /></td>
+            <td><a href="#" onclick="del_confirm(<?=$book['id']?>);">删除</a></td>
+        </tr>
+    <?php }?>
+    <tr>
+        <td colspan="3">
+        <input type="submit" value="更新数量" />
+        <td>
+        <td>购物车总价: <?=$this->totalPrice?>元
+        &nbsp; <a href='/hall/gohallui'>返回购物大厅</a>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="7">
+        <input type="button" onclick="" value="清空购物车" />
+        <input type="button" onclick="" value="提交订单" />
+        </td>
+    </tr>
+</table>
+</form>
+
+</body>
+</center>
+</html>

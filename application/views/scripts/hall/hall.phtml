@@ -1,0 +1,34 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>购物大厅</title>
+    <script type="text/javascript">
+        function goMyCart()
+        {
+            window.location.href = "/shopping/showcart";
+        }
+    </script>
+</head>
+<center>
+<body>
+    <h1><font color="blue">欢迎<?=$this->username?>光临购物大厅</font></h1>
+    <table width="500px">
+        <tr>
+            <td>书名</td><td>作者</td><td>价格</td><td>出版社</td><td>购买</td>
+        </tr>
+        
+<?php foreach ($this->books as $item) {?>
+<tr>
+    <td><?=$item["name"]?></td>
+    <td><?=$item["author"]?></td>
+    <td><?=$item["publishHouse"]?></td>
+    <td><?=$item["price"]?></td>
+    <td><a href="/shopping/addproduct?bookid=<?=$item['id']?>">购买</a></td>
+</tr>
+<?php }?>
+<tr><td><input type="button" onclick="goMyCart();" value="查看购物车" href="#"/></td></tr>
+</table>
+
+</body>
+</center>
+</html>
